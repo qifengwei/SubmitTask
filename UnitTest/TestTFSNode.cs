@@ -69,5 +69,24 @@ namespace UnitTest
             Assert.AreEqual(node.ToString(), $"Field=FieldName, LabelName=, " +
                 $"DefaultText=, DefaultOption=");
         }
+        [TestMethod]
+        [DataTestMethod]
+        [DataRow("FieldName", "LabelName", "DefaultText", true)]
+        [DataRow("FieldName", "LabelName", "", true)]
+        [DataRow("FieldName", "", "DefaultText", false)]
+        [DataRow("", "LabelName", "DefaultText", false)]
+        public void TestCheck(String s1, String s2, String s3, Boolean b4)
+        {
+            List<String> defaultOption3 = new List<string> { "Op1", "Op2", "Op3" };
+            List<String> defaultOption0 = new List<string> { };
+            TFSNode node = new TFSNode
+            {
+                FieldName = s1,
+                LabelName = s2,
+                DefaultText = s3,
+                DefaultOption = defaultOption3
+            };
+            Assert.AreEqual(b4, node.Check());
+        }
     }
 }

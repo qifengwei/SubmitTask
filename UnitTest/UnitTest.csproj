@@ -52,6 +52,7 @@
     <Compile Include="TestExcelNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestTFSNode.cs" />
+    <Compile Include="TestSavedSetting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
