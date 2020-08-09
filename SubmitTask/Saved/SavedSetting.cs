@@ -25,22 +25,18 @@ namespace SubmitTask.Saved
 
         public Boolean AddTFSNode(TFSNode node)
         {
-            if (node.Check())
-            {
-                TFSNodesList.Add(node);
-                return true;
-            }
-            return false;           
+            if (!node.Check()) return false;
+            else if (TFSNodesList.Exists(x => x.FieldName == node.FieldName)) return false;
+            TFSNodesList.Add(node);
+            return true;
         }
 
         public Boolean AddExcelNode(ExcelNode node)
         {
-            if (node.Check())
-            {
-                ExcelNodesList.Add(node);
-                return true;
-            }
-            return false;
+            if (!node.Check()) return false;
+            else if (ExcelNodesList.Exists(x => x.FieldName == node.FieldName)) return false;            
+            ExcelNodesList.Add(node);
+            return true;
         }
 
         public void ClearExcelNodesList()
@@ -58,25 +54,15 @@ namespace SubmitTask.Saved
             ExcelNodesList.Clear();
         }
 
-        public Boolean AddExcelNodes(List<ExcelNode> nodes)
+        public void AddExcelNodes(List<ExcelNode> nodes)
         {
-            foreach (var node in nodes)
-            {
-                if (!node.Check()) return false;
-            }
-            foreach (var node in nodes) ExcelNodesList.Add(node);
-            return true;
+            foreach (var node in nodes)AddExcelNode(node);
         }
 
 
-        public Boolean AddTFSNodes(List<TFSNode> nodes)
+        public void AddTFSNodes(List<TFSNode> nodes)
         {
-            foreach (var node in nodes)
-            {
-                if (!node.Check()) return false;
-            }
             foreach (var node in nodes) TFSNodesList.Add(node);
-            return true;
         }
     }
 }
