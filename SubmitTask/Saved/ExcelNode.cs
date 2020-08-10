@@ -11,6 +11,7 @@ namespace SubmitTask.Saved
         public String FieldName { get; set; } = "";
         public String LabelName { get; set; } = "";
         public Int32 ColumnNum { get; set; } = 0;
+        public Boolean Required { get; set; } = false;
         public Boolean Check()
         {
             if (ColumnNum <= 0) return false;

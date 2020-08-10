@@ -24,6 +24,7 @@ namespace SubmitTask.Saved
         /// 默认下拉菜单可选项
         /// </summary>
         public List<String> DefaultOption { get; set; } = new List<string>();
+        public Boolean Required { get; set; } = false;
         /// <summary>
         /// 检查TFSNode是否有效
         /// </summary>
