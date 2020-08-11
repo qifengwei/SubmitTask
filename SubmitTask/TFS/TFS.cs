@@ -109,16 +109,79 @@ namespace SubmitTask.TFS
             }
         }
         public NodeCollection GetIterationRootNodes() => RecentProject.IterationRootNodes;
-        public Node GetTopNode(String name) => RecentProject.IterationRootNodes[name];
-        public Node GetTopNode(int index) => RecentProject.IterationRootNodes[index];
-        public Node FindIterationNode(String Name)
+        public Node GetTopIterationNode(String name) => RecentProject.IterationRootNodes[name];
+        public Node GetTopIterationNode(int index) => RecentProject.IterationRootNodes[index];
+        public Node FindIterationNode(String name)
         {
             foreach (Node node in GetIterationRootNodes())
             {
-                
+                if (node.Name == name) return node;
+                if (node.HasChildNodes)
+                {
+                    Node find = FindNode(node, name);
+                    if (find != null) return find;
+                }
             }
-            return GetIterationRootNodes()[1];
+            return null;
         }
-        
+        public NodeCollection GetAreaRootNodes() => RecentProject.AreaRootNodes;
+        public Node GetTopAreaNode(String name) => RecentProject.AreaRootNodes[name];
+        public Node GetTopAreaNode(int index) => RecentProject.AreaRootNodes[index];
+        public Node FindAreaNode(String name)
+        {
+            foreach (Node node in GetAreaRootNodes())
+            {
+                if (node.Name == name) return node;
+                if (node.HasChildNodes)
+                {
+                    Node find = FindNode(node, name);
+                    if (find != null) return find;
+                }
+            }
+            return null;
+        }
+        public List<String> GetAllChildNodesName(Node node)
+        {
+            List<String> names = new List<string>();
+            AddChildNodesName(node, ref names);
+            return names;
+        }
+        public List<String> GetAllChildNodesName(NodeCollection collection)
+        {
+            List<String> names = new List<string>();
+            foreach (Node node in collection)
+            {
+                names.Add(node.Name);
+                names.AddRange(GetAllChildNodesName(node));
+            }
+            return names;
+        }
+        private void AddChildNodesName(Node node, ref List<String> ls)
+        {
+            if (!node.HasChildNodes)
+            {
+                ls.Add(node.Name);
+                return;
+            }
+            else
+            {
+                ls.Add(node.Name);
+                foreach (Node child in node) AddChildNodesName(child, ref ls);
+            }
+        }
+        private Node FindNode(Node parent, String name)
+        {
+            if (parent.Name == name) return parent;
+            if (!parent.HasChildNodes) return null;
+            else 
+            {
+                foreach (Node child in parent.ChildNodes)
+                {
+                    Node find = FindNode(child, name);
+                    if (find != null) return find;
+                }
+                return null;
+            }
+        }
     }
 }
