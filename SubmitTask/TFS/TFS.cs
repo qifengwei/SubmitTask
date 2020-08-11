@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.TeamFoundation.Client;
@@ -40,14 +41,42 @@ namespace SubmitTask.TFS
                 return false;
             }
         }
-        public Boolean ConnectTFS(String username, String password)
+        public Boolean ConnectTFS(String username, String password, String domain)
         {
-            return false;
+            try
+            {
+                NetworkCredential cred = new NetworkCredential(username, password, domain);
+                TFSTeamProject = new TfsTeamProjectCollection(new Uri(@"http://tfs:8080/tfs/defaultcollection"), cred);
+                TFSTeamProject.Authenticate();
+                ItemStore = TFSTeamProject.GetService<WorkItemStore>();
+                RecentProject = ItemStore.Projects["TASK"];
+                ItemType = RecentProject.WorkItemTypes["TASK"];
+                return true;
+            }
+            catch
+            {
+                return false;
+            }           
+        }
+        public Boolean ConnectTFS(String userNameWithDomain, String password)
+        {
+            try
+            {
+                String[] nameAndDomain = userNameWithDomain.Split('@');
+                String username = nameAndDomain[0];
+                String domain = nameAndDomain[1];
+                return ConnectTFS(username, password, domain);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                return false;
+            }          
         }
         public Boolean ChangeWorkItemStore(String name)
         {
             try
             {
+                RecentProject = null;
                 RecentProject = ItemStore.Projects["TASK"];
                 return true;
             }
@@ -88,6 +117,7 @@ namespace SubmitTask.TFS
             {
                 
             }
+            return GetIterationRootNodes()[1];
         }
         
     }
