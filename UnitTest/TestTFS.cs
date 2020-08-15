@@ -121,7 +121,7 @@ namespace UnitTest
             Assert.IsTrue(tfs.GetAllChildNodesName(tfs.GetAreaRootNodes()) is List<String>);
             Assert.IsTrue(tfs.GetAllChildNodesName(tfs.FindAreaNode("XR")) is List<String>);
             var s = tfs.GetAllChildNodesName(tfs.FindAreaNode("XR"));
-            Assert.IsTrue(tfs.GetAllChildNodesName(tfs.FindAreaNode("XR")).Contains("08_Loutang"));
+            Assert.IsTrue(tfs.GetAllChildNodesName(tfs.FindAreaNode(23792)).Contains("08_Loutang"));
             Assert.IsTrue(tfs.GetAllChildNodesName(tfs.GetAreaRootNodes()).Contains("08_Loutang"));
             Assert.IsTrue(!tfs.GetAllChildNodesName(tfs.GetAreaRootNodes()).Contains("123"));
         }

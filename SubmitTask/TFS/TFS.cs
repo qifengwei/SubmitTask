@@ -77,7 +77,7 @@ namespace SubmitTask.TFS
             try
             {
                 RecentProject = null;
-                RecentProject = ItemStore.Projects["TASK"];
+                RecentProject = ItemStore.Projects[name];
                 return true;
             }
             catch
@@ -140,6 +140,19 @@ namespace SubmitTask.TFS
             }
             return null;
         }
+        public Node FindAreaNode(int id)
+        {
+            foreach (Node node in GetAreaRootNodes())
+            {
+                if (node.Id == id) return node;
+                if (node.HasChildNodes)
+                {
+                    Node find = FindNode(node, id);
+                    if (find != null) return find;
+                }
+            }
+            return null;
+        }
         public List<String> GetAllChildNodesName(Node node)
         {
             List<String> names = new List<string>();
@@ -180,6 +193,64 @@ namespace SubmitTask.TFS
                     Node find = FindNode(child, name);
                     if (find != null) return find;
                 }
+                return null;
+            }
+        }
+        private Node FindNode(Node parent, Int32 id)
+        {
+            if (parent.Id == id) return parent;
+            if (!parent.HasChildNodes) return null;
+            else
+            {
+                foreach (Node child in parent.ChildNodes)
+                {
+                    Node find = FindNode(child, id);
+                    if (find != null) return find;
+                }
+                return null;
+            }
+        }
+        public List<String> GetFieldDefinitionsText(String typeName)
+        {
+            try
+            {
+                WorkItemType type = RecentProject.WorkItemTypes[typeName];
+                FieldDefinitionCollection fields = type.FieldDefinitions;
+                List<String> fieldsText = new List<string>();
+                foreach (FieldDefinition field in fields) fieldsText.Add(field.Name);
+                return fieldsText;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public List<String> GetFieldDefinitionsText(Int32 id)
+        {
+            try
+            {
+                WorkItemType type = RecentProject.WorkItemTypes[id];
+                FieldDefinitionCollection fields = type.FieldDefinitions;
+                List<String> fieldsText = new List<string>();
+                foreach (FieldDefinition field in fields) fieldsText.Add(field.Name);
+                return fieldsText;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public List<String> GetAllFieldDefinitionsText()
+        {
+            try
+            {
+                FieldDefinitionCollection fields = ItemStore.FieldDefinitions;
+                List<String> fieldsText = new List<string>();
+                foreach (FieldDefinition field in fields) fieldsText.Add(field.Name);
+                return fieldsText;
+            }
+            catch
+            {
                 return null;
             }
         }

@@ -171,6 +171,12 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Saved\SettingUI\ConfigureUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Saved\SettingUI\ConfigureUI.Designer.cs">
+      <DependentUpon>ConfigureUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="TFS\TFS.cs" />
     <Compile Include="UI.cs">
       <SubType>Component</SubType>
@@ -186,7 +192,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Saved\SettingUI\ConfigureUI.resx">
+      <DependentUpon>ConfigureUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI.resx">
       <DependentUpon>UI.cs</DependentUpon>
     </EmbeddedResource>
@@ -212,6 +222,11 @@
       <DependentUpon>ThisAddIn.Designer.xml</DependentUpon>
     </Compile>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resource\Left.png" />
+    <Content Include="Resource\Right.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
