@@ -14,9 +14,9 @@ namespace UnitTest
             {
                 FieldName = "FieldName",
                 LabelName = "LabelName",
-                ColumnNum = 5
+                ColumnNum = "A"
             };
-            Assert.AreEqual(node.ColumnNum, 5);
+            Assert.AreEqual(node.ColumnNum, "A");
             Assert.AreEqual(node.FieldName, "FieldName");
             Assert.AreEqual(node.LabelName, "LabelName");
         }
@@ -28,26 +28,26 @@ namespace UnitTest
             {
                 FieldName = "FieldName",
                 LabelName = "LabelName",
-                ColumnNum = 5
+                ColumnNum = "A",
             };
-            Assert.AreEqual(node.ToString(), "FieldName=FieldName, LabelName=LabelName, ColumnNum=5");
+            Assert.AreEqual(node.ToString(), "FieldName=FieldName, LabelName=LabelName, ColumnNum=A");
         }
 
         [TestMethod]
         [DataTestMethod]
-        [DataRow("FieldName", "LabelName", 0, false)]
-        [DataRow("FieldName", "LabelName", -5, false)]
-        [DataRow("", "LabelName", 5, false)]
-        [DataRow("FieldName", "", 5, false)]
-        [DataRow("", "", 5, false)]
-        [DataRow("FieldName", "LabelName", 1, true)]
-        public void TestCheck(String s1, String s2, Int32 i1, Boolean b1)
+        [DataRow("FieldName", "LabelName", "", false)]
+        [DataRow("FieldName", "LabelName", "", false)]
+        [DataRow("", "LabelName", "A", false)]
+        [DataRow("FieldName", "", "A", false)]
+        [DataRow("", "", "A", false)]
+        [DataRow("FieldName", "LabelName", "AA", true)]
+        public void TestCheck(String s1, String s2, String s3, Boolean b1)
         {
             ExcelNode node = new ExcelNode
             {
                 FieldName = s1,
                 LabelName = s2,
-                ColumnNum = i1
+                ColumnNum = s3
             };
             Assert.AreEqual(node.Check(), b1);
         }

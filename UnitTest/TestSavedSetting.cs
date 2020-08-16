@@ -27,7 +27,7 @@ namespace UnitTest
         {
             SavedSetting setting = SavedSetting.GetInstance();
             setting.Clear();
-            ExcelNode enode = new ExcelNode() { LabelName = "1", FieldName = "2", ColumnNum = 3 };
+            ExcelNode enode = new ExcelNode() { LabelName = "1", FieldName = "2", ColumnNum = "A" };
             setting.AddExcelNode(enode);
             TFSNode tnode = new TFSNode() { LabelName = "1", FieldName = "2" };
             setting.AddTFSNode(tnode);
@@ -42,7 +42,7 @@ namespace UnitTest
         {
             SavedSetting setting = SavedSetting.GetInstance();
             setting.Clear();
-            ExcelNode enode = new ExcelNode() { LabelName = "1", FieldName = "2", ColumnNum = 3 };
+            ExcelNode enode = new ExcelNode() { LabelName = "1", FieldName = "2", ColumnNum = "A" };
             setting.AddExcelNode(enode);
             TFSNode tnode = new TFSNode() { LabelName = "1", FieldName = "2" };
             setting.AddTFSNode(tnode);
@@ -56,7 +56,7 @@ namespace UnitTest
         public void TestAddExcelNode()
         {
             SavedSetting setting = SavedSetting.GetInstance();
-            ExcelNode node = new ExcelNode() { LabelName="1", FieldName="2", ColumnNum = 3};
+            ExcelNode node = new ExcelNode() { LabelName="1", FieldName="2", ColumnNum = "A"};
             setting.Clear();
             Assert.IsTrue(setting.AddExcelNode(node));
             Assert.AreEqual(1, setting.ExcelSize);
@@ -107,17 +107,17 @@ namespace UnitTest
 
         [TestMethod]
         [DataTestMethod]
-        [DataRow("1","2",3,"1","2",3,1)]
-        [DataRow("1", "2", 3, "2", "2", 3, 1)]
-        [DataRow("1", "2", 1, "1", "2", 3, 1)]
-        [DataRow("1", "3", 3, "1", "2", 3, 2)]
-        public void TestAddExcelNodes(string s1, string s2, int i3, string s4, string s5, int i6, int i7)
+        [DataRow("1","2","A","1","2", "A", 1)]
+        [DataRow("1", "2", "A", "2", "2", "A", 1)]
+        [DataRow("1", "2", "A", "1", "2", "A", 1)]
+        [DataRow("1", "3", "A", "1", "2", "A", 2)]
+        public void TestAddExcelNodes(string s1, string s2, string s3, string s4, string s5, string s6, int i7)
         {
             SavedSetting setting = SavedSetting.GetInstance();
             List<ExcelNode> nodes =
                 new List<ExcelNode> { 
-                    new ExcelNode() { LabelName = s1, FieldName = s2, ColumnNum = i3 },
-                    new ExcelNode() { LabelName = s4, FieldName = s5, ColumnNum = i6} 
+                    new ExcelNode() { LabelName = s1, FieldName = s2, ColumnNum = s3 },
+                    new ExcelNode() { LabelName = s4, FieldName = s5, ColumnNum = s6} 
                 };
             setting.Clear();
             setting.AddExcelNodes(nodes);

@@ -28,20 +28,7 @@ namespace SubmitTask.Saved.SettingUI
             {
                 lbUnselectedFields.Items.Add(item);
             }
-            lvExcel.View = View.Details;
-            lvExcel.FullRowSelect = true;
-            lvExcel.LabelEdit = true;
-            //ColumnHeader[] header = {
-            //    new ColumnHeader("字段"),
-            //    new ColumnHeader("显示"),
-            //    new ColumnHeader("表列"),
-            //    new ColumnHeader("必填"),
-            //};
-            //lvExcel.Columns.AddRange(header);
-            lvExcel.Columns.Add("字段名", 220);
-            lvExcel.Columns.Add("显示值", 220);
-            lvExcel.Columns.Add("表列", 57);
-            lvExcel.Columns.Add("必填", 50);
+            dgvExcel.DataSource = saved.ExcelNodesList;
         }
 
         private void bReset_Click(object sender, EventArgs e)
@@ -53,25 +40,33 @@ namespace SubmitTask.Saved.SettingUI
         {
             if (lbUnselectedFields.SelectedItem != null)
             {
-                ListViewItem item = new ListViewItem((String)lbUnselectedFields.SelectedItem);
-                item.SubItems.Add((String)lbUnselectedFields.SelectedItem);
-                item.SubItems.Add("1");
-                lvExcel.Items.Add(item);
-                
                 saved.AddExcelNode(new ExcelNode()
                 {
-                    FieldName = (String)lbUnselectedFields.SelectedItem,
-                    LabelName = (String)lbUnselectedFields.SelectedItem,
-                    ColumnNum = 1,
-                    Required = false
-                });
-                lbUnselectedFields.Items.Remove(lbUnselectedFields.SelectedItem);               
+                    FieldName = (string)lbUnselectedFields.SelectedItem,
+                    LabelName = (string)lbUnselectedFields.SelectedItem,
+                    ColumnNum = "A",
+                    Required = true,
+                }) ;
+                //dgvExcel.DataSource =null;
+                //dgvExcel.DataSource = saved.ExcelNodesList;
+                CurrencyManager cm = (CurrencyManager)dgvExcel.BindingContext[saved.ExcelNodesList];
+                if (cm != null) cm.Refresh();
+                lbUnselectedFields.Items.Remove(lbUnselectedFields.SelectedItem);
             }
         }
 
         private void bRemoveExcel_Click(object sender, EventArgs e)
         {
-
+            if (dgvExcel.SelectedRows != null)
+            {
+                foreach (DataGridViewRow selectedrow in dgvExcel.SelectedRows)
+                {
+                    saved.ExcelNodesList.RemoveAll(node => node.FieldName == selectedrow.Cells[1].Value.ToString());
+                    CurrencyManager cm = (CurrencyManager)dgvExcel.BindingContext[saved.ExcelNodesList];
+                    if (cm != null) cm.Refresh();
+                    //lbUnselectedFields.Items.Add(dgvExcel.SelectedRows[0].Cells[1].Value.ToString());
+                }
+            }
         }
 
         private void ConfigureUI_Load(object sender, EventArgs e)
@@ -82,6 +77,11 @@ namespace SubmitTask.Saved.SettingUI
         private void bCancel_Click(object sender, EventArgs e)
         {
             Application.ExitThread();
+        }
+
+        private void excelNodesListBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

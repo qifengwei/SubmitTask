@@ -10,11 +10,11 @@ namespace SubmitTask.Saved
     {
         public String FieldName { get; set; } = "";
         public String LabelName { get; set; } = "";
-        public Int32 ColumnNum { get; set; } = 0;
+        public String ColumnNum { get; set; } = "";
         public Boolean Required { get; set; } = false;
         public Boolean Check()
         {
-            if (ColumnNum <= 0) return false;
+            if (ColumnNum == "") return false;
             else if (FieldName == "") return false;
             else if (LabelName == "") return false;
             else return true;

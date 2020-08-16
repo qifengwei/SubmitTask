@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbUnselectedFields = new System.Windows.Forms.ListBox();
             this.bReset = new System.Windows.Forms.Button();
             this.bApply = new System.Windows.Forms.Button();
@@ -38,8 +39,17 @@
             this.bAddTFS = new System.Windows.Forms.Button();
             this.bRemoveTFS = new System.Windows.Forms.Button();
             this.bCancel = new System.Windows.Forms.Button();
-            this.lvExcel = new System.Windows.Forms.ListView();
             this.lvTFS = new System.Windows.Forms.ListView();
+            this.dgvExcel = new System.Windows.Forms.DataGridView();
+            this.excelNodesListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.savedSettingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.fieldNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnNumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.requiredDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvExcel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.excelNodesListBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.savedSettingBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // lbUnselectedFields
@@ -144,14 +154,6 @@
             this.bCancel.UseVisualStyleBackColor = true;
             this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
-            // lvExcel
-            // 
-            this.lvExcel.Location = new System.Drawing.Point(391, 43);
-            this.lvExcel.Name = "lvExcel";
-            this.lvExcel.Size = new System.Drawing.Size(547, 294);
-            this.lvExcel.TabIndex = 7;
-            this.lvExcel.UseCompatibleStateImageBehavior = false;
-            // 
             // lvTFS
             // 
             this.lvTFS.Location = new System.Drawing.Point(388, 373);
@@ -160,13 +162,73 @@
             this.lvTFS.TabIndex = 7;
             this.lvTFS.UseCompatibleStateImageBehavior = false;
             // 
+            // dgvExcel
+            // 
+            this.dgvExcel.AutoGenerateColumns = false;
+            this.dgvExcel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvExcel.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fieldNameDataGridViewTextBoxColumn,
+            this.labelNameDataGridViewTextBoxColumn,
+            this.columnNumDataGridViewTextBoxColumn,
+            this.requiredDataGridViewCheckBoxColumn});
+            this.dgvExcel.DataSource = this.excelNodesListBindingSource;
+            this.dgvExcel.Location = new System.Drawing.Point(388, 43);
+            this.dgvExcel.Name = "dgvExcel";
+            this.dgvExcel.RowHeadersWidth = 30;
+            this.dgvExcel.RowTemplate.Height = 30;
+            this.dgvExcel.Size = new System.Drawing.Size(547, 306);
+            this.dgvExcel.TabIndex = 8;
+            // 
+            // excelNodesListBindingSource
+            // 
+            this.excelNodesListBindingSource.DataMember = "ExcelNodesList";
+            this.excelNodesListBindingSource.DataSource = this.savedSettingBindingSource;
+            this.excelNodesListBindingSource.CurrentChanged += new System.EventHandler(this.excelNodesListBindingSource_CurrentChanged);
+            // 
+            // savedSettingBindingSource
+            // 
+            this.savedSettingBindingSource.DataSource = typeof(SubmitTask.Saved.SavedSetting);
+            // 
+            // fieldNameDataGridViewTextBoxColumn
+            // 
+            this.fieldNameDataGridViewTextBoxColumn.DataPropertyName = "FieldName";
+            this.fieldNameDataGridViewTextBoxColumn.HeaderText = "字段名";
+            this.fieldNameDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.fieldNameDataGridViewTextBoxColumn.Name = "fieldNameDataGridViewTextBoxColumn";
+            this.fieldNameDataGridViewTextBoxColumn.Width = 205;
+            // 
+            // labelNameDataGridViewTextBoxColumn
+            // 
+            this.labelNameDataGridViewTextBoxColumn.DataPropertyName = "LabelName";
+            this.labelNameDataGridViewTextBoxColumn.HeaderText = "显示名";
+            this.labelNameDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.labelNameDataGridViewTextBoxColumn.Name = "labelNameDataGridViewTextBoxColumn";
+            this.labelNameDataGridViewTextBoxColumn.Width = 205;
+            // 
+            // columnNumDataGridViewTextBoxColumn
+            // 
+            this.columnNumDataGridViewTextBoxColumn.DataPropertyName = "ColumnNum";
+            this.columnNumDataGridViewTextBoxColumn.HeaderText = "列";
+            this.columnNumDataGridViewTextBoxColumn.MinimumWidth = 8;
+            this.columnNumDataGridViewTextBoxColumn.Name = "columnNumDataGridViewTextBoxColumn";
+            this.columnNumDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnNumDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // requiredDataGridViewCheckBoxColumn
+            // 
+            this.requiredDataGridViewCheckBoxColumn.DataPropertyName = "Required";
+            this.requiredDataGridViewCheckBoxColumn.HeaderText = "必填";
+            this.requiredDataGridViewCheckBoxColumn.MinimumWidth = 8;
+            this.requiredDataGridViewCheckBoxColumn.Name = "requiredDataGridViewCheckBoxColumn";
+            this.requiredDataGridViewCheckBoxColumn.Width = 50;
+            // 
             // ConfigureUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 744);
+            this.Controls.Add(this.dgvExcel);
             this.Controls.Add(this.lvTFS);
-            this.Controls.Add(this.lvExcel);
             this.Controls.Add(this.bRemoveTFS);
             this.Controls.Add(this.bAddTFS);
             this.Controls.Add(this.bRemoveExcel);
@@ -180,6 +242,9 @@
             this.Name = "ConfigureUI";
             this.Text = "ConfigureUI";
             this.Load += new System.EventHandler(this.ConfigureUI_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvExcel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.excelNodesListBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.savedSettingBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,7 +262,13 @@
         private System.Windows.Forms.Button bAddTFS;
         private System.Windows.Forms.Button bRemoveTFS;
         private System.Windows.Forms.Button bCancel;
-        private System.Windows.Forms.ListView lvExcel;
         private System.Windows.Forms.ListView lvTFS;
+        private System.Windows.Forms.DataGridView dgvExcel;
+        private System.Windows.Forms.BindingSource excelNodesListBindingSource;
+        private System.Windows.Forms.BindingSource savedSettingBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fieldNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn labelNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnNumDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn requiredDataGridViewCheckBoxColumn;
     }
 }

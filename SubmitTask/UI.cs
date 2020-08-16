@@ -17,7 +17,6 @@ namespace SubmitTask
         {
 
         }
-
         private void bConfiguration_Click(object sender, RibbonControlEventArgs e)
         {
             System.Threading.Tasks.Task.Run(() =>
