@@ -57,7 +57,7 @@ namespace SubmitTask.Saved.SettingUI
                 item.SubItems.Add((String)lbUnselectedFields.SelectedItem);
                 item.SubItems.Add("1");
                 lvExcel.Items.Add(item);
-                //item.SubItems.Add();
+                
                 saved.AddExcelNode(new ExcelNode()
                 {
                     FieldName = (String)lbUnselectedFields.SelectedItem,
