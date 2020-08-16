@@ -31,11 +31,15 @@
             this.lbUnselectedFields = new System.Windows.Forms.ListBox();
             this.bReset = new System.Windows.Forms.Button();
             this.bApply = new System.Windows.Forms.Button();
-            this.lvExcel = new System.Windows.Forms.ListView();
-            this.lvTFS = new System.Windows.Forms.ListView();
             this.lExcel = new System.Windows.Forms.Label();
             this.lTFS = new System.Windows.Forms.Label();
             this.bAddExcel = new System.Windows.Forms.Button();
+            this.bRemoveExcel = new System.Windows.Forms.Button();
+            this.bAddTFS = new System.Windows.Forms.Button();
+            this.bRemoveTFS = new System.Windows.Forms.Button();
+            this.bCancel = new System.Windows.Forms.Button();
+            this.lvExcel = new System.Windows.Forms.ListView();
+            this.lvTFS = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // lbUnselectedFields
@@ -66,22 +70,6 @@
             this.bApply.Text = "应用";
             this.bApply.UseVisualStyleBackColor = true;
             // 
-            // lvExcel
-            // 
-            this.lvExcel.Location = new System.Drawing.Point(388, 51);
-            this.lvExcel.Name = "lvExcel";
-            this.lvExcel.Size = new System.Drawing.Size(550, 268);
-            this.lvExcel.TabIndex = 2;
-            this.lvExcel.UseCompatibleStateImageBehavior = false;
-            // 
-            // lvTFS
-            // 
-            this.lvTFS.Location = new System.Drawing.Point(388, 376);
-            this.lvTFS.Name = "lvTFS";
-            this.lvTFS.Size = new System.Drawing.Size(550, 288);
-            this.lvTFS.TabIndex = 3;
-            this.lvTFS.UseCompatibleStateImageBehavior = false;
-            // 
             // lExcel
             // 
             this.lExcel.AutoSize = true;
@@ -102,28 +90,96 @@
             // 
             // bAddExcel
             // 
-            this.bAddExcel.Image = global::SubmitTask.Properties.Resources.Right;
-            this.bAddExcel.Location = new System.Drawing.Point(323, 112);
+            this.bAddExcel.BackgroundImage = global::SubmitTask.Properties.Resources.Right;
+            this.bAddExcel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bAddExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bAddExcel.Location = new System.Drawing.Point(320, 117);
             this.bAddExcel.Name = "bAddExcel";
-            this.bAddExcel.Size = new System.Drawing.Size(75, 54);
+            this.bAddExcel.Size = new System.Drawing.Size(63, 35);
             this.bAddExcel.TabIndex = 6;
             this.bAddExcel.UseVisualStyleBackColor = true;
+            this.bAddExcel.Click += new System.EventHandler(this.bAddExcel_Click);
+            // 
+            // bRemoveExcel
+            // 
+            this.bRemoveExcel.BackgroundImage = global::SubmitTask.Properties.Resources.Left;
+            this.bRemoveExcel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bRemoveExcel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bRemoveExcel.Location = new System.Drawing.Point(320, 172);
+            this.bRemoveExcel.Name = "bRemoveExcel";
+            this.bRemoveExcel.Size = new System.Drawing.Size(63, 35);
+            this.bRemoveExcel.TabIndex = 6;
+            this.bRemoveExcel.UseVisualStyleBackColor = true;
+            this.bRemoveExcel.Click += new System.EventHandler(this.bRemoveExcel_Click);
+            // 
+            // bAddTFS
+            // 
+            this.bAddTFS.BackgroundImage = global::SubmitTask.Properties.Resources.Right;
+            this.bAddTFS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bAddTFS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bAddTFS.Location = new System.Drawing.Point(322, 482);
+            this.bAddTFS.Name = "bAddTFS";
+            this.bAddTFS.Size = new System.Drawing.Size(63, 35);
+            this.bAddTFS.TabIndex = 6;
+            this.bAddTFS.UseVisualStyleBackColor = true;
+            // 
+            // bRemoveTFS
+            // 
+            this.bRemoveTFS.BackgroundImage = global::SubmitTask.Properties.Resources.Left;
+            this.bRemoveTFS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.bRemoveTFS.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.bRemoveTFS.Location = new System.Drawing.Point(322, 537);
+            this.bRemoveTFS.Name = "bRemoveTFS";
+            this.bRemoveTFS.Size = new System.Drawing.Size(63, 35);
+            this.bRemoveTFS.TabIndex = 6;
+            this.bRemoveTFS.UseVisualStyleBackColor = true;
+            // 
+            // bCancel
+            // 
+            this.bCancel.Location = new System.Drawing.Point(331, 692);
+            this.bCancel.Name = "bCancel";
+            this.bCancel.Size = new System.Drawing.Size(124, 40);
+            this.bCancel.TabIndex = 1;
+            this.bCancel.Text = "取消";
+            this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
+            // 
+            // lvExcel
+            // 
+            this.lvExcel.Location = new System.Drawing.Point(391, 43);
+            this.lvExcel.Name = "lvExcel";
+            this.lvExcel.Size = new System.Drawing.Size(547, 294);
+            this.lvExcel.TabIndex = 7;
+            this.lvExcel.UseCompatibleStateImageBehavior = false;
+            // 
+            // lvTFS
+            // 
+            this.lvTFS.Location = new System.Drawing.Point(388, 373);
+            this.lvTFS.Name = "lvTFS";
+            this.lvTFS.Size = new System.Drawing.Size(547, 294);
+            this.lvTFS.TabIndex = 7;
+            this.lvTFS.UseCompatibleStateImageBehavior = false;
             // 
             // ConfigureUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 744);
+            this.Controls.Add(this.lvTFS);
+            this.Controls.Add(this.lvExcel);
+            this.Controls.Add(this.bRemoveTFS);
+            this.Controls.Add(this.bAddTFS);
+            this.Controls.Add(this.bRemoveExcel);
             this.Controls.Add(this.bAddExcel);
             this.Controls.Add(this.lTFS);
             this.Controls.Add(this.lExcel);
-            this.Controls.Add(this.lvTFS);
-            this.Controls.Add(this.lvExcel);
+            this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bApply);
             this.Controls.Add(this.bReset);
             this.Controls.Add(this.lbUnselectedFields);
             this.Name = "ConfigureUI";
             this.Text = "ConfigureUI";
+            this.Load += new System.EventHandler(this.ConfigureUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,10 +190,14 @@
         private System.Windows.Forms.ListBox lbUnselectedFields;
         private System.Windows.Forms.Button bReset;
         private System.Windows.Forms.Button bApply;
-        private System.Windows.Forms.ListView lvExcel;
-        private System.Windows.Forms.ListView lvTFS;
         private System.Windows.Forms.Label lExcel;
         private System.Windows.Forms.Label lTFS;
         private System.Windows.Forms.Button bAddExcel;
+        private System.Windows.Forms.Button bRemoveExcel;
+        private System.Windows.Forms.Button bAddTFS;
+        private System.Windows.Forms.Button bRemoveTFS;
+        private System.Windows.Forms.Button bCancel;
+        private System.Windows.Forms.ListView lvExcel;
+        private System.Windows.Forms.ListView lvTFS;
     }
 }
