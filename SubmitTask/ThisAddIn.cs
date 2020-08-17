@@ -6,6 +6,8 @@ using System.Xml.Linq;
 using Excel = Microsoft.Office.Interop.Excel;
 using Office = Microsoft.Office.Core;
 using Microsoft.Office.Tools.Excel;
+using System.IO;
+using SubmitTask.Saved;
 
 namespace SubmitTask
 {
@@ -13,6 +15,14 @@ namespace SubmitTask
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            if (!Directory.Exists(Saved.UserPath.savedfolder))
+            {
+                Directory.CreateDirectory(Saved.UserPath.savedfolder);
+            }
+            if (Directory.Exists(Saved.UserPath.savedpath))
+            {
+                UserPath.SerializerSaved();
+            }
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)

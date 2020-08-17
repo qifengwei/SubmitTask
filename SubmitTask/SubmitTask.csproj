@@ -177,6 +177,7 @@
     <Compile Include="Saved\SettingUI\ConfigureUI.Designer.cs">
       <DependentUpon>ConfigureUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="Saved\UserPath.cs" />
     <Compile Include="TFS\TFS.cs" />
     <Compile Include="UI.cs">
       <SubType>Component</SubType>
@@ -201,6 +202,7 @@
       <DependentUpon>UI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\SubmitTask.Saved.SavedSetting.datasource" />
+    <None Include="Properties\DataSources\SubmitTask.Saved.TFSNode.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
