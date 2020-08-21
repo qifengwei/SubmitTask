@@ -19,7 +19,7 @@ namespace UnitTest
         [TestMethod]
         [DataTestMethod]
         [DataRow("someone", "password", false)]
-        [DataRow("fengwei.qi@united-imaging.com", "8x81v1yN", true)]
+        [DataRow("11", "11", false)]
         public void TestConnectTFSWithName2(string name, string password, Boolean ok)
         {
             TFS tfs = new TFS();

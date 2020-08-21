@@ -19,7 +19,10 @@ namespace SubmitTask.Saved
 
         private static SavedSetting instance = new SavedSetting();
 
-        private SavedSetting() { }
+        private SavedSetting() 
+        {
+
+        }
 
         public static SavedSetting GetInstance() => instance;
 
